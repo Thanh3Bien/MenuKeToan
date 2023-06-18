@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -35,12 +34,38 @@ public class MenuKeToan {
         s = sc.nextLine();
         return s;
     }
-
+    
+    private static String controlId(Scanner sc, List<Accountant> ds, Accountant x){
+        CheckCondition condition = new CheckCondition();
+        boolean check = false;
+        for(Accountant i : ds){
+            if(x.id.equals(i.id)){
+                check = true;
+                break;
+            }
+        }
+        while (check == true) {
+            System.out.println("ID is not existed, please try again");
+            x.setId((condition.inputId(sc)));
+            for(Accountant i : ds){
+                if(x.id.equals(i.id)){
+                    check = true;
+                    break;
+                }
+                else{
+                    check = false;
+                }
+        }
+        }
+        return x.id;
+        
+    }
     private static void inputInformation(Scanner sc, List<Accountant> ds) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat();
         Accountant x = new Accountant();
         CheckCondition condition = new CheckCondition();
         x.setId(condition.inputId(sc));
+        controlId(sc, ds, x);
         x.setFirstName(condition.inputName(sc, "First name"));
         x.setSureName(condition.inputName(sc, "Sure name"));
         x.setBirthday(condition.inputDate(sc));

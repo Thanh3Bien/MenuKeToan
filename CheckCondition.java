@@ -94,6 +94,7 @@ public class CheckCondition {
         boolean cont;
         String s;
         Date x = null;
+        format.setLenient(false);
         do {
             try {
                 x = format.parse(inputString(sc, ""));
